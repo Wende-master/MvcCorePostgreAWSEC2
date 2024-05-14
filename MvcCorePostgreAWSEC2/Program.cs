@@ -5,12 +5,20 @@ using MvcCorePostgreAWSEC2.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//string connectionString =
+//    builder.Configuration.GetConnectionString("Postgres");
+//builder.Services.AddTransient<RepositoryDepartamentos>();
+//builder.Services.AddDbContext<DepartamentosContext>(
+
+//    options => options.UseNpgsql(connectionString)
+//    );
+
 string connectionString =
-    builder.Configuration.GetConnectionString("Postgres");
+    builder.Configuration.GetConnectionString("MySql");
 builder.Services.AddTransient<RepositoryDepartamentos>();
 builder.Services.AddDbContext<DepartamentosContext>(
 
-    options => options.UseNpgsql(connectionString)
+    options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
     );
 
 
